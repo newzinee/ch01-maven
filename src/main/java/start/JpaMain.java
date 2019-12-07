@@ -1,7 +1,7 @@
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+package start;
+
+import javax.persistence.*;
+import java.util.List;
 
 public class JpaMain {
     public static void main(String[] args) {
@@ -24,7 +24,7 @@ public class JpaMain {
     }
 
     private static void logic(EntityManager em) {
-        String id = "id1";
+        String id = "id2";
 
         Member member = new Member();
         member.setId(id);
@@ -34,14 +34,21 @@ public class JpaMain {
         // 1. 등록
         em.persist(member);
 
+        // 2. 조회
         Member findMember = em.find(Member.class, id);
         System.out.println("findMember: " + findMember.getId() + ", " + findMember.getUsername() + ", " + findMember.getAge());
 
-        // 2. 수정
+        // 3. 수정
         member.setAge(30);  // update sql을 사용하지 않아도, DB값 바뀜
 
         Member findMember2 = em.find(Member.class, id);
         System.out.println("findMember2: " + findMember2.getId() + ", " + findMember2.getUsername() + ", " + findMember2.getAge());
 
+        // 4. 목록 조회 JPQL - 여기서 Member는 DB 테이블이 아니라 Entity 객체..!
+        List<Member> members = em.createQuery("select m from start.Member as m", Member.class).getResultList();
+        System.out.println("members.size: " + members.size());
+
+        // 5. 삭제
+        em.remove(member);
     }
 }
