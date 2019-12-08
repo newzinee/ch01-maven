@@ -1,5 +1,8 @@
 package start;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -19,10 +22,12 @@ public class Member {
     @Enumerated(EnumType.STRING) // enum 타입
     private RoleType roleType;
 
-    @org.hibernate.annotations.Type(type = "LocalDateTime")
+    @CreationTimestamp
+//    @org.hibernate.annotations.Type(type = "LocalDateTime")
     private LocalDateTime createdDate;
 
-    @org.hibernate.annotations.Type(type = "LocalDateTime")
+    @UpdateTimestamp
+//    @org.hibernate.annotations.Type(type = "LocalDateTime")
     private LocalDateTime lastModifiedDate;
 
     @Lob // 길이 제한X: CLOB, BLOB
