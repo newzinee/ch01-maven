@@ -1,9 +1,7 @@
 package start;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="MEMBER")
@@ -17,6 +15,18 @@ public class Member {
     private String username;
 
     private Integer age;
+
+    @Enumerated(EnumType.STRING) // enum 타입
+    private RoleType roleType;
+
+    @org.hibernate.annotations.Type(type = "LocalDateTime")
+    private LocalDateTime createdDate;
+
+    @org.hibernate.annotations.Type(type = "LocalDateTime")
+    private LocalDateTime lastModifiedDate;
+
+    @Lob // 길이 제한X: CLOB, BLOB
+    private String description;
 
     public String getId() {
         return id;
@@ -40,5 +50,37 @@ public class Member {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public RoleType getRoleType() {
+        return roleType;
+    }
+
+    public void setRoleType(RoleType roleType) {
+        this.roleType = roleType;
+    }
+
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(LocalDateTime createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public LocalDateTime getLastModifiedDate() {
+        return lastModifiedDate;
+    }
+
+    public void setLastModifiedDate(LocalDateTime lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

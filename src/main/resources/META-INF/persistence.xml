@@ -17,7 +17,9 @@
             <property name="hibernate.use_sql_comments" value="true" />
             <property name="hibernate.id.new_generator_mappings" value="true" />
 
-            <!--<property name="hibernate.hbm2ddl.auto" value="create" />-->
+            <!-- 스키마 자동 생성 기능(참고용) create는 drop+create -->
+            <property name="hibernate.hbm2ddl.auto" value="create" />
+
         </properties>
     </persistence-unit>
 

@@ -19,3 +19,14 @@ JPQL은 SQL을 추상화한 객체지향 쿼리 언어. DB랑 상관 없이 엔�
 --- 
 
 내 기준에서 이 프로젝트에서 눈 여겨 봐야할 점은 **SQL을 사용하지 않았다**는 점이다. 
+
+
+---
+
+hibernate orm 5.3.14.Final document: https://docs.jboss.org/hibernate/stable/orm/userguide/html_single/Hibernate_User_Guide.html
+
+@Temporal(TemporalType.TIMESTAMP) 는 java.util.Date 나 java.util.Calendar 쓸 때 사용
+
+java8 시간인 java.time.LocalDateTime 쓰고 싶다면,  **@org.hibernate.annotations.Type(type = "LocalDateTime")**
+
+책에 나온 org.hibernate.cfg.ImprovedNamingStrategy 를 사용해서, 이름을 자바의 카멜 표기법에서 언더스코어 표기법으로 하는 매핑은 hibernate에서 deprecated 됨.
