@@ -32,3 +32,7 @@ java8 시간인 java.time.LocalDateTime 쓰고 싶다면,  **@org.hibernate.anno
 등록, 수정일을 자동으로 넣어주고 싶다면, @CreationTimestamp, @UpdateTimestamp 사용
 
 책에 나온 org.hibernate.cfg.ImprovedNamingStrategy 를 사용해서, 이름을 자바의 카멜 표기법에서 언더스코어 표기법으로 하는 매핑은 hibernate에서 deprecated 됨.
+
+---
+
+Member 클래스에 테이블 제약조건 추가(사실, auto-ddl일때만 유효)
