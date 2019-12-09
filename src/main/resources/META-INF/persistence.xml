@@ -18,7 +18,7 @@
             <property name="hibernate.id.new_generator_mappings" value="true" />
 
             <!-- 스키마 자동 생성 기능(참고용) create는 drop+create -->
-            <property name="hibernate.hbm2ddl.auto" value="create" />
+            <property name="hibernate.hbm2ddl.auto" value="update" />
 
         </properties>
     </persistence-unit>

@@ -12,7 +12,9 @@ public class JpaMain {
 
         try {
             tx.begin();
-            logic(em);
+//            logic(em);
+//            sequenceGenerator(em);
+            tableGenerator(em);
             tx.commit();
         } catch(Exception e ) {
             tx.rollback();
@@ -21,6 +23,13 @@ public class JpaMain {
         }
 
         emf.close();
+    }
+
+    private static void tableGenerator(EntityManager em) {
+        Memo memo = new Memo();
+        em.persist(memo);
+        System.out.println("memo: " + memo.getId());
+        memo.setTitle("title " + memo.getId() );
     }
 
     private static void logic(EntityManager em) {
@@ -33,6 +42,8 @@ public class JpaMain {
 
         // 1. 등록
         em.persist(member);
+        System.out.println("memberid: " + member.getId());
+
 
         // 2. 조회
         Member findMember = em.find(Member.class, id);
@@ -50,5 +61,15 @@ public class JpaMain {
 
         // 5. 삭제
         em.remove(member);
+    }
+
+    private static void sequenceGenerator(EntityManager em) {
+        Board board = new Board();
+        System.out.println("board.getId1: "+board.getId()); // null
+        em.persist(board);
+        System.out.println("board.getId2: "+board.getId());
+
+        board.setData("data " + board.getId());
+
     }
 }

@@ -36,3 +36,30 @@ java8 시간인 java.time.LocalDateTime 쓰고 싶다면,  **@org.hibernate.anno
 ---
 
 Member 클래스에 테이블 제약조건 추가(사실, auto-ddl일때만 유효)
+
+---
+
+키 할당 전략 
+1. IDENTITY : 기본 키 생성을 DB에 위임. 예를 들어 MySQL의 AUTO_INCREMENT 쓸때 사용. 
+    - @GeneratedValue(strategy = GenerationType.IDENTITY)
+2. SEQUENCE : 시퀀스 사용하는 DB에서 사용 가능. 오라클, H2 등
+    - 시퀀스 생성(H2): create sequence BOARD_SEQ start with 1 increment by 1;
+    - @SequenceGenerator(name, sequenceName, initialValue, allocationSize)
+    - @GeneratedValue(strategy, generator)
+    - @GeneratedValue`generator` = @SequenceGenerator `name` 
+    - @SequenceGenerator `sequenceName` DB 시퀀스명 쓰기 
+3. TABLE : 시퀀스 테이블을 임의로 생성해서 사용. 모든 DB 가능
+    ```roomsql
+   create table MY_SEQUENCES (
+       sequence_name varchar(255) not null, -- 시퀀스 명
+       next_val bigint,                     -- 시퀀스 값
+       primary key (sequence_name)
+   )
+   ```
+   - @TableGenerator(name, table, pkColumnValue, allocationSize)
+   - @GeneratedValue(strategy, generator)
+   - `table` 시퀀스 명(sequence_name)컬럼에 `pkColumnValue` 이름으로 row 생성
+   - @TableGenerator의 다른 속성
+        - pkColumnName: 시퀀스 컬럼명(sequence_name)
+        - valueColumnName: 시퀀스 값 컬럼명(next_val) 
+4. AUTO : DB에 따라 자동 매치. 오라클-sequence, Mysql-identity...
