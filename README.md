@@ -63,3 +63,12 @@ Member 클래스에 테이블 제약조건 추가(사실, auto-ddl일때만 유�
         - pkColumnName: 시퀀스 컬럼명(sequence_name)
         - valueColumnName: 시퀀스 값 컬럼명(next_val) 
 4. AUTO : DB에 따라 자동 매치. 오라클-sequence, Mysql-identity...
+
+---
+
+@Transient : 이 필드는 매핑하지 않음. DB에 저장 안되고 조회도 안됨. 객체에 임시보관하고 싶을때 사용
+
+@Access : JPA가 엔티티 데이터에 접근하는 방식 설정(field, property)
+- `getXxx()`로 만들면, XXX로 컬럼명 생성(hbm2ddl.auto)해서 return 값을 table에 넣어줌
+- 주의! `setXxx(param)`도 만들어줘야함. 안써도 만들어줘야함.
+- `set` 메소드 param의 type은 안 맞춰도 되는..듯? 그래도 맞추는게 좋겠..지?

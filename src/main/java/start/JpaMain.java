@@ -27,6 +27,8 @@ public class JpaMain {
 
     private static void tableGenerator(EntityManager em) {
         Memo memo = new Memo();
+        memo.setPs("화이팅");
+
         em.persist(memo);
         System.out.println("memo: " + memo.getId());
         memo.setTitle("title " + memo.getId() );

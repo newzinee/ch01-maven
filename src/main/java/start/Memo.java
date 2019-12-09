@@ -1,6 +1,7 @@
 package start;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @TableGenerator(
@@ -17,6 +18,9 @@ public class Memo {
 
     private String title;
 
+    @Transient
+    private String ps;
+
     public Long getId() {
         return id;
     }
@@ -31,5 +35,35 @@ public class Memo {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getPs() {
+        return ps;
+    }
+
+    public void setPs(String ps) {
+        this.ps = ps;
+    }
+
+    @Access(AccessType.PROPERTY)
+    public String getPostscript() {
+        System.out.println("getPostscript");
+        return ps + "!!";
+    }
+
+    public void setPostscript(String postscript) {
+        // 호출 안됨
+        System.out.println("setPostscript");
+    }
+
+    @Access(AccessType.PROPERTY)
+    public LocalDateTime getTime() {
+        return LocalDateTime.now();
+    }
+
+    @Access(AccessType.PROPERTY)
+    public void setTime(String localDateTime) {
+        // 호출 안됨
+        System.out.println("setTime");
     }
 }
